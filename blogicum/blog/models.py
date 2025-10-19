@@ -6,7 +6,7 @@ User = get_user_model()
 
 class Category(models.Model):
     """Модель тематической категории."""
-    
+
     title = models.CharField(
         'Заголовок',
         max_length=256
@@ -15,7 +15,10 @@ class Category(models.Model):
     slug = models.SlugField(
         'Идентификатор',
         unique=True,
-        help_text='Идентификатор страницы для URL; разрешены символы латиницы, цифры, дефис и подчёркивание.'
+        help_text=(
+            'Идентификатор страницы для URL; разрешены символы латиницы, '
+            'цифры, дефис и подчёркивание.'
+        )
     )
     is_published = models.BooleanField(
         'Опубликовано',
@@ -34,7 +37,7 @@ class Category(models.Model):
 
 class Location(models.Model):
     """Модель географической метки."""
-    
+
     name = models.CharField('Название места', max_length=256)
     is_published = models.BooleanField(
         'Опубликовано',
@@ -53,12 +56,15 @@ class Location(models.Model):
 
 class Post(models.Model):
     """Модель публикации."""
-    
+
     title = models.CharField('Заголовок', max_length=256)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
         'Дата и время публикации',
-        help_text='Если установить дату и время в будущем — можно делать отложенные публикации.'
+        help_text=(
+            'Если установить дату и время в будущем — '
+            'можно делать отложенные публикации.'
+        )
     )
     author = models.ForeignKey(
         User,
@@ -69,7 +75,7 @@ class Post(models.Model):
         Location,
         on_delete=models.SET_NULL,
         null=True,
-        blank=False,
+        blank=True,
         verbose_name='Местоположение'
     )
     category = models.ForeignKey(

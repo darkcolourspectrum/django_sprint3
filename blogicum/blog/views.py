@@ -11,7 +11,7 @@ def index(request):
         category__is_published=True,
         pub_date__lte=timezone.now()
     ).select_related('category', 'location', 'author')[:5]
-    
+
     context = {
         'post_list': posts,
     }
@@ -25,13 +25,13 @@ def category_posts(request, category_slug):
         slug=category_slug,
         is_published=True
     )
-    
+
     posts = Post.objects.filter(
         category=category,
         is_published=True,
         pub_date__lte=timezone.now()
     ).select_related('category', 'location', 'author')
-    
+
     context = {
         'category': category,
         'post_list': posts,
@@ -48,7 +48,7 @@ def post_detail(request, post_id):
         category__is_published=True,
         pub_date__lte=timezone.now()
     )
-    
+
     context = {
         'post': post,
     }

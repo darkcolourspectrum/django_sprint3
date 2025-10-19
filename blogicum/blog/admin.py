@@ -34,4 +34,3 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'text')
     list_per_page = 20
     date_hierarchy = 'pub_date'
- 
